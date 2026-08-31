@@ -1,0 +1,42 @@
+﻿  rapt_app.cpp
+  rapt_audio.cpp
+  rapt_color.cpp
+  rapt_comm.cpp
+  rapt_console.cpp
+  rapt_CPU.cpp
+  rapt_CPUHelpers.cpp
+  rapt_font.cpp
+  rapt_graphics.cpp
+  rapt_input.cpp
+  rapt_image.cpp
+  rapt_iobuffer.cpp
+  rapt_list.cpp
+  rapt_math.cpp
+  rapt_matrix.cpp
+  rapt_ml.cpp
+  rapt_object.cpp
+  rapt_point.cpp
+  rapt_random.cpp
+  rapt_rect.cpp
+  rapt_settings.cpp
+  rapt_social.cpp
+  rapt_sprite.cpp
+  rapt_string.cpp
+  rapt_utils.cpp
+  graphics_core.cpp
+  input_core.cpp
+  leaktester.cpp
+  network_core.cpp
+  os_core.cpp
+  social_core.cpp
+  sound_core.cpp
+  transaction_core.cpp
+  rapt_model.cpp
+  rapt_shaders.cpp
+  D:\Raptisoft\Source\Framework\OS\Windows\gl30.h(1822) : Reminder: Finish me...(RenderBlurred)<-------------------------------------------------------------------------------------------------
+  D:\Raptisoft\Source\Framework\OS\Windows\gl30.h(2078) : Reminder: Finish me...(DrawLine)<-------------------------------------------------------------------------------------------------
+glew32.lib(glew32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in bass.lib(bass.dll); second definition ignored
+OpenGL32.Lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in bass.lib(bass.dll); second definition ignored
+SDL2.lib(SDL2.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in bass.lib(bass.dll); second definition ignored
+SDL2_image.lib(SDL2_image.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in bass.lib(bass.dll); second definition ignored
+  RAPT.vcxproj -> D:\Raptisoft\Source\Framework\OS\Windows\RAPT.lib

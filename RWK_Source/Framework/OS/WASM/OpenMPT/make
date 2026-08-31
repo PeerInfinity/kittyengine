@@ -1,0 +1,29 @@
+#!/bin/bash
+
+source ~/emsdk/emsdk_env.sh
+
+#WASM_RESOURCES="--preload-file music@/music"
+WASM_RESOURCES=""
+
+COMMON_FILES=$(find "libopenmpt/common" -maxdepth 1 -type f -name "*.cpp")
+SOUNDLIB_FILES1=$(find "libopenmpt/soundlib" -maxdepth 1 -type f -name "*.cpp")
+SOUNDLIB_FILES2=$(find "libopenmpt/soundlib/plugins" -maxdepth 1 -type f -name "*.cpp")
+SOUNDLIB_FILES3=$(find "libopenmpt/soundlib/plugins/dmo" -maxdepth 1 -type f -name "*.cpp")
+SOUNDLIB_FILES4=$(find "libopenmpt/minimp3" -maxdepth 1 -type f -name "*.cpp")
+SOUNDLIB_FILES5=$(find "libopenmpt/soundbase" -maxdepth 1 -type f -name "*.cpp")
+SOUNDLIB_FILES6=$(find "libopenmpt/sounddsp" -maxdepth 1 -type f -name "*.cpp")
+SOUNDLIB_FILES="$SOUNDLIB_FILES1 $SOUNDLIB_FILES2 $SOUNDLIB_FILES3 $SOUNDLIB_FILES4 $SOUNDLIB_FILES5 $SOUNDLIB_FILES6"
+
+set MPT_FILES=""
+MPT_FILES="$MPT_FILES libopenmpt/libopenmpt_c.cpp"
+MPT_FILES="$MPT_FILES libopenmpt/libopenmpt_cxx.cpp"
+MPT_FILES="$MPT_FILES libopenmpt/libopenmpt_impl.cpp"
+MPT_FILES="$MPT_FILES libopenmpt/libopenmpt_ext_impl.cpp"
+MY_DEFINES="-D MPT_WITH_SDL2 -D MPT_WITH_OGG -D MPT_WITH_MINIMP3 -D HAVE_ALLOCA_H -D MPT_WITH_VORBIS -D MPT_WITH_VORBISFILE -D NO_XMPLAY -D NO_WINAMP -D LIBOPENMPT_BUILD"
+
+emcc -o ../openmpt.o -shared $MY_DEFINES  -I"soundlib" -I"include" -I"libopenmpt" -I"libopenmpt/common" $COMMON_FILES $SOUNDLIB_FILES $MPT_FILES $WASM_RESOURCES --std=c++17 --use-port=ogg --use-port=vorbis -fsigned-char
+
+
+
+
+

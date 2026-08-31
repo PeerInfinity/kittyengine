@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Leak Testing|Win32">
+      <Configuration>Leak Testing</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C4EBE17C-B203-4A09-ACB5-F4458F588D82}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Win</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Leak Testing|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Leak Testing|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(IncludePath);Z:\OS\Windows\DirectX\Include;Z:\RAPT;Z:\OS\Windows;Z:\RakNet\RakNet_Source;Z:\LibCurl\Win</IncludePath>
+    <OutDir>..\..\..\Resources\</OutDir>
+    <TargetName>RWK</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(IncludePath);Z:\OS\Windows\DirectX\Include;Z:\RAPT;Z:\OS\Windows;Z:\RakNet\RakNet_Source;Z:\LibCurl\Win</IncludePath>
+    <TargetName>RWK</TargetName>
+    <OutDir>..\..\..\Resources\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Leak Testing|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <TargetName>RWK</TargetName>
+    <OutDir>..\..\..\Resources\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions);XAppRunsInThread</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(IncludePath);Z:\OS\Windows\DirectX\Include;Z:\RAPT;Z:\OS\Windows;Z:\RakNet\RakNet_Source;Z:\LibCurl\Win</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(IntDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <ProfileGuidedDatabase>$(IntDir)$(TargetName).pgd</ProfileGuidedDatabase>
+      <IgnoreSpecificDefaultLibraries>libcmt</IgnoreSpecificDefaultLibraries>
+      <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions);AppXRunsInThread</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ProgramDatabaseFile>$(IntDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <ProfileGuidedDatabase>$(IntDir)$(TargetName).pgd</ProfileGuidedDatabase>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Leak Testing|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions);AppXRunsInThread;LEAKTESTING</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ProgramDatabaseFile>$(IntDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <ProfileGuidedDatabase>$(IntDir)$(TargetName).pgd</ProfileGuidedDatabase>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Source\Anim.cpp" />
+    <ClCompile Include="..\..\..\Source\Beepbox.cpp" />
+    <ClCompile Include="..\..\..\Source\Bundle_Controls.cpp" />
+    <ClCompile Include="..\..\..\Source\Bundle_ETools.cpp" />
+    <ClCompile Include="..\..\..\Source\Bundle_FunDialog.cpp" />
+    <ClCompile Include="..\..\..\Source\Bundle_Loader.cpp" />
+    <ClCompile Include="..\..\..\Source\Bundle_Play.cpp" />
+    <ClCompile Include="..\..\..\Source\Bundle_Sounds.cpp" />
+    <ClCompile Include="..\..\..\Source\Bundle_Tiles.cpp" />
+    <ClCompile Include="..\..\..\Source\Dialog.cpp" />
+    <ClCompile Include="..\..\..\Source\HighScoreList.cpp" />
+    <ClCompile Include="..\..\..\Source\MainMenu.cpp" />
+    <ClCompile Include="..\..\..\Source\Makermall.cpp" />
+    <ClCompile Include="..\..\..\Source\MLRender.cpp" />
+    <ClCompile Include="..\..\..\Source\MyApp.cpp" />
+    <ClCompile Include="..\..\..\Source\Game.cpp" />
+    <ClCompile Include="..\..\..\Source\Pathfinder_Atomica.cpp" />
+    <ClCompile Include="..\..\..\Source\Player.cpp" />
+    <ClCompile Include="..\..\..\Source\SaveGame.cpp" />
+    <ClCompile Include="..\..\..\Source\TitleScreen.cpp" />
+    <ClCompile Include="..\..\..\Source\TouchButtons.cpp" />
+    <ClCompile Include="..\..\..\Source\World.cpp" />
+    <ClCompile Include="..\..\..\Source\WorldEditor.cpp" />
+    <ClCompile Include="..\Main_Win.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\..\..\..\Framework\OS\Windows\RAPT.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Source\Anim.h" />
+    <ClInclude Include="..\..\..\Source\Beepbox.h" />
+    <ClInclude Include="..\..\..\Source\Bundle_Controls.h" />
+    <ClInclude Include="..\..\..\Source\Bundle_ETools.h" />
+    <ClInclude Include="..\..\..\Source\Bundle_FunDialog.h" />
+    <ClInclude Include="..\..\..\Source\Bundle_Loader.h" />
+    <ClInclude Include="..\..\..\Source\Bundle_Play.h" />
+    <ClInclude Include="..\..\..\Source\Bundle_Sounds.h" />
+    <ClInclude Include="..\..\..\Source\Bundle_Tiles.h" />
+    <ClInclude Include="..\..\..\Source\Dialog.h" />
+    <ClInclude Include="..\..\..\Source\HighScoreList.h" />
+    <ClInclude Include="..\..\..\Source\MainMenu.h" />
+    <ClInclude Include="..\..\..\Source\Makermall.h" />
+    <ClInclude Include="..\..\..\Source\MLRender.h" />
+    <ClInclude Include="..\..\..\Source\MyApp.h" />
+    <ClInclude Include="..\..\..\Source\Game.h" />
+    <ClInclude Include="..\..\..\Source\Globals.h" />
+    <ClInclude Include="..\..\..\Source\Pathfinder_Atomica.h" />
+    <ClInclude Include="..\..\..\Source\Player.h" />
+    <ClInclude Include="..\..\..\Source\SaveGame.h" />
+    <ClInclude Include="..\..\..\Source\TitleScreen.h" />
+    <ClInclude Include="..\..\..\Source\TouchButtons.h" />
+    <ClInclude Include="..\..\..\Source\World.h" />
+    <ClInclude Include="..\..\..\Source\WorldEditor.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\readme.txt" />
+    <None Include="..\Game.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\RWK.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

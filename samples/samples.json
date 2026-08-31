@@ -1,0 +1,57 @@
+{
+ "_doc": "written by samples/generate.py",
+ "samples": [
+  {
+   "name": "corridor",
+   "blurb": "every authorable id of the gif dialect",
+   "authored_in": "gif",
+   "converted_by": "gif2kitty",
+   "grid": [
+    101,
+    12
+   ],
+   "distinct_ids": 39,
+   "ticks": 1500,
+   "solvability_at_risk": true
+  },
+  {
+   "name": "corridor-rwk",
+   "blurb": "every authorable layout id of the .kitty side",
+   "authored_in": "kitty",
+   "converted_by": "kitty2gif",
+   "grid": [
+    231,
+    12
+   ],
+   "distinct_ids": 74,
+   "ticks": 3200,
+   "solvability_at_risk": true
+  },
+  {
+   "name": "minimal",
+   "blurb": "a robot, a floor and a kitty",
+   "authored_in": "gif",
+   "converted_by": "gif2kitty",
+   "grid": [
+    12,
+    6
+   ],
+   "distinct_ids": 4,
+   "ticks": 250,
+   "solvability_at_risk": false
+  },
+  {
+   "name": "steps",
+   "blurb": "jump platforms, one key gate, one enemy",
+   "authored_in": "gif",
+   "converted_by": "gif2kitty",
+   "grid": [
+    47,
+    12
+   ],
+   "distinct_ids": 8,
+   "ticks": 600,
+   "solvability_at_risk": false
+  }
+ ]
+}

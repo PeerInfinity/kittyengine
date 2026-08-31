@@ -1,0 +1,3 @@
+# corridor: the intended solution, as the engine's oracle tape
+# button,fromTick,toTick  (inclusive); replayed by scripts/local/completability_gate.py
+right,0,1400

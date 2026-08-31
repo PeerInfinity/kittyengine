@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Leak Testing|Win32">
+      <Configuration>Leak Testing</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Leak Test|Win32">
+      <Configuration>Leak Test</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release (No Bass)|Win32">
+      <Configuration>Release (No Bass)</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RunOverlay|Win32">
+      <Configuration>RunOverlay</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Steam Debug|Win32">
+      <Configuration>Steam Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Steam Release|Win32">
+      <Configuration>Steam Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Stripped|Win32">
+      <Configuration>Stripped</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FB7CDEF6-D7BC-48F3-B4ED-C668C313A707}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>RAPT</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RunOverlay|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Steam Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Steam Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Leak Testing|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release (No Bass)|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Stripped|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Leak Test|Win32'">
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='RunOverlay|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Steam Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Steam Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Leak Testing|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release (No Bass)|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Stripped|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\..\</OutDir>
+    <IncludePath>$(VCInstallDir)PlatformSDK\include;C:\Users\Raptisoft\Desktop\Raptisoft\SourceCode_RAPT\OS\Windows\DirectX\Include;C:\Users\Raptisoft\Desktop\Raptisoft\SourceCode_RAPT\RAPT;C:\Users\Raptisoft\Desktop\Raptisoft\SourceCode_RAPT\OS\Windows;C:\Users\Raptisoft\Desktop\Raptisoft\SourceCode_RAPT\CoolStuff;$(ProjectDir)..\..\DirectX\Include;$(ProjectDir)..\..;$(ProjectDir)\..\..\..\..\RAPT;$(ProjectDir)\..\..\..\..\CoolStuf;$(IncludePath);;Z:\OS\Windows\DirectX\Include;Z:\RAPT;Z:\OS\Windows;Z:\RakNet\RakNet_Source;Z:\LibCurl\Win;</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RunOverlay|Win32'">
+    <OutDir>..\..\</OutDir>
+    <IncludePath>$(VCInstallDir)PlatformSDK\include;C:\Users\Raptisoft\Desktop\Raptisoft\SourceCode_RAPT\OS\Windows\DirectX\Include;C:\Users\Raptisoft\Desktop\Raptisoft\SourceCode_RAPT\RAPT;C:\Users\Raptisoft\Desktop\Raptisoft\SourceCode_RAPT\OS\Windows;C:\Users\Raptisoft\Desktop\Raptisoft\SourceCode_RAPT\CoolStuff;$(ProjectDir)..\..\DirectX\Include;$(ProjectDir)..\..;$(ProjectDir)\..\..\..\..\RAPT;$(ProjectDir)\..\..\..\..\CoolStuf;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Steam Debug|Win32'">
+    <OutDir>..\..\</OutDir>
+    <IncludePath>$(IncludePath);;Z:\OS\Windows\DirectX\Include;Z:\RAPT;Z:\OS\Windows;Z:\RakNet\RakNet_Source;Z:\LibCurl\Win</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\</OutDir>
+    <IncludePath>$(IncludePath);;Z:\OS\Windows\DirectX\Include;Z:\RAPT;Z:\OS\Windows;Z:\RakNet\RakNet_Source;Z:\LibCurl\Win</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Steam Release|Win32'">
+    <OutDir>..\..\</OutDir>
+    <IncludePath>$(IncludePath);;Z:\OS\Windows\DirectX\Include;Z:\RAPT;Z:\OS\Windows;Z:\RakNet\RakNet_Source;Z:\LibCurl\Win</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Leak Testing|Win32'">
+    <OutDir>..\..\</OutDir>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release (No Bass)|Win32'">
+    <OutDir>..\..\</OutDir>
+    <IncludePath>$(VCInstallDir)PlatformSDK\include;C:\Users\Raptisoft\Desktop\Raptisoft\SourceCode_RAPT\OS\Windows\DirectX\Include;C:\Users\Raptisoft\Desktop\Raptisoft\SourceCode_RAPT\RAPT;C:\Users\Raptisoft\Desktop\Raptisoft\SourceCode_RAPT\OS\Windows;C:\Users\Raptisoft\Desktop\Raptisoft\SourceCode_RAPT\CoolStuff;$(ProjectDir)..\..\DirectX\Include;$(ProjectDir)..\..;$(ProjectDir)\..\..\..\..\RAPT;$(ProjectDir)\..\..\..\..\CoolStuf;$(IncludePath);;Z:\OS\Windows\DirectX\Include;Z:\RAPT;Z:\OS\Windows;Z:\RakNet\RakNet_Source;Z:\LibCurl\Win;</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Stripped|Win32'">
+    <OutDir>..\..\</OutDir>
+    <IncludePath>$(VCInstallDir)PlatformSDK\include;C:\Users\Raptisoft\Desktop\Raptisoft\SourceCode_RAPT\OS\Windows\DirectX\Include;C:\Users\Raptisoft\Desktop\Raptisoft\SourceCode_RAPT\RAPT;C:\Users\Raptisoft\Desktop\Raptisoft\SourceCode_RAPT\OS\Windows;C:\Users\Raptisoft\Desktop\Raptisoft\SourceCode_RAPT\CoolStuff;$(ProjectDir)..\..\DirectX\Include;$(ProjectDir)..\..;$(ProjectDir)\..\..\..\..\RAPT;$(ProjectDir)\..\..\..\..\CoolStuf;$(IncludePath);;Z:\OS\Windows\DirectX\Include;Z:\RAPT;Z:\OS\Windows;Z:\RakNet\RakNet_Source;Z:\LibCurl\Win;</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);XAppRunsInThread;RAPT_LIBRARY;</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>Z:\OS\Windows\DirectX\Include;Z:\RAPT;Z:\OS\Windows;Z:\RakNet\RakNet_Source;Z:\LibCurl\Win</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>legacy_stdio_definitions.lib</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RunOverlay|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);XAppRunsInThread;RAPT_LIBRARY;</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Steam Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_STEAM;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);XAppRunsInThread;RAPT_LIBRARY;</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions);AppXRunsInThread;RAPT_LIBRARY;</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Steam Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>_STEAM;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions);AppXRunsInThread;RAPT_LIBRARY;</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Leak Testing|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions);AppXRunsInThread;LEAKTESTING;RAPT_LIBRARY;</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release (No Bass)|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions);AppXRunsInThread;RAPT_LIBRARY;</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Stripped|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions);AppXRunsInThread;NOGFX;RAPT_LIBRARY;</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\RAPT\rapt_app.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_audio.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_color.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_comm.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_console.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_CPU.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_CPUHelpers.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_defines.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_font.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_graphics.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_input.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_image.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_iobuffer.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_list.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_math.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_matrix.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_ml.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_object.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_point.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_headers.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_random.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_rect.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_settings.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_smartpointer.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_social.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_sprite.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_string.h" />
+    <ClInclude Include="..\..\..\..\RAPT\rapt_utils.h" />
+    <ClInclude Include="..\..\graphics_core.h" />
+    <ClInclude Include="..\..\input_core.h" />
+    <ClInclude Include="..\..\leaktester.h" />
+    <ClInclude Include="..\..\network_core.h" />
+    <ClInclude Include="..\..\os_headers.h" />
+    <ClInclude Include="..\..\os_core.h" />
+    <ClInclude Include="..\..\social_core.h" />
+    <ClInclude Include="..\..\sound_core.h" />
+    <ClInclude Include="..\..\transaction_core.h" />
+    <ClInclude Include="..\..\util_core.h" />
+    <ClInclude Include="..\..\gl30.h" />
+    <ClInclude Include="D:\Raptisoft\Source\Framework\RAPT\rapt_model.h" />
+    <ClInclude Include="D:\Raptisoft\Source\Framework\RAPT\rapt_shaders.h" />
+    <ClInclude Include="D:\Raptisoft\Source\Framework\RAPT\rapt_vertexformats.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\RAPT\rapt_app.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_audio.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_color.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_comm.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_console.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_CPU.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_CPUHelpers.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_font.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_graphics.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_input.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_image.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_iobuffer.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_list.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_math.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_matrix.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_ml.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_object.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_point.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_random.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_rect.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_settings.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_social.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_sprite.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_string.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_utils.cpp" />
+    <ClCompile Include="..\..\graphics_core.cpp" />
+    <ClCompile Include="..\..\input_core.cpp" />
+    <ClCompile Include="..\..\leaktester.cpp" />
+    <ClCompile Include="..\..\network_core.cpp" />
+    <ClCompile Include="..\..\os_core.cpp" />
+    <ClCompile Include="..\..\social_core.cpp" />
+    <ClCompile Include="..\..\sound_core.cpp" />
+    <ClCompile Include="..\..\transaction_core.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_model.cpp" />
+    <ClCompile Include="..\..\..\..\RAPT\rapt_shaders.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\Lib\glew32.lib" />
+    <Library Include="..\..\Lib\OpenGL32.Lib" />
+    <Library Include="..\..\Lib\SDL2.lib" />
+    <Library Include="..\..\Lib\SDL2_image.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

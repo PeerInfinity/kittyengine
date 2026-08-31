@@ -1,0 +1,6 @@
+﻿  graphics_core.cpp
+glew32.lib(glew32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in bass.lib(bass.dll); second definition ignored
+OpenGL32.Lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in bass.lib(bass.dll); second definition ignored
+SDL2.lib(SDL2.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in bass.lib(bass.dll); second definition ignored
+SDL2_image.lib(SDL2_image.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in bass.lib(bass.dll); second definition ignored
+  RAPT.vcxproj -> D:\Raptisoft\Source\Framework\OS\Windows\RAPT.lib

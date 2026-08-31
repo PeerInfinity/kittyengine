@@ -1,0 +1,76 @@
+kittyengine — licence status
+
+This repository contains the source code of a 2D platformer engine written by
+John Raptis (Raptisoft) and released publicly by its author, plus community
+modifications.  It contains NO art, music, sounds, fonts, or level data from
+the original game: those assets were removed before this repository's first
+commit and remain the property of their copyright holders.  The placeholder
+assets in this repository are generated, original, and dedicated to the public
+domain (CC0).
+
+Status of the engine code:
+
+  - The code is copyright John Raptis (Raptisoft).
+
+  - On 21 November 2025 the author agreed in writing to release the source
+    under a Creative Commons licence ("Okay, creative commons it is!").  The
+    specific licence has not yet been named; a request to name it is with the
+    author.  This file will be replaced by that licence when it arrives.
+
+  - Until then, treat the code as source-available: study and private builds,
+    yes; redistribution rights beyond what this repository itself does, not yet
+    granted.
+
+Our modifications are offered under the MIT licence (below), effective
+independently of the base code's licence.  They are:
+
+  - the audio backend replacement (BASS removed; one Sound_Core on SDL2 and the
+    vendored public-domain stb_vorbis);
+  - WebAssembly build support;
+  - the gl11 renderer route for the browser build;
+  - the asset existence guard, which turns a missing asset file from a silent
+    crash into graceful degradation;
+  - the asset stripping itself;
+  - the placeholder asset pack and the generator that writes it, including the
+    sprite-bundle writer;
+  - the build and test infrastructure (the no-originals guard, the
+    completability gate, the sample levels and their tapes, CI).
+
+Takedown promise: if John Raptis (Raptisoft) or Mike Hommel (Hamumu) asks for
+this repository to be removed or changed, we will comply promptly and without
+argument.
+
+The "Robot Wants" name and the original character designs are not used in this
+project, and nothing here grants any rights to them.
+
+
+-------------------------------------------------------------------------------
+MIT License (applies to the modifications listed above, not to the base engine)
+
+Copyright (c) 2026 kittyengine contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+-------------------------------------------------------------------------------
+Third-party components
+
+RWK_Source/Framework/OS/*/ThirdParty/ vendors dependencies (SDL2, GLEW, curl,
+stb, and others) under their own licences.  See the licence files that travel
+with each of them and README-ThirdParty.txt.

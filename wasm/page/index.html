@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title>kittyengine</title>
+<style>
+  body{font-family:arial;margin:0;background:#111;color:#bbb}
+  #playarea{text-align:center;padding:8px}
+  canvas{border:0;background:#000;image-rendering:pixelated}
+  #log{font:11px/1.35 monospace;white-space:pre-wrap;max-height:220px;overflow:auto;
+       background:#000;color:#8f8;padding:6px;margin:8px}
+  #bar{font:12px monospace;padding:6px 12px;background:#000;color:#ccc}
+  button{font:12px monospace}
+</style>
+</head>
+<body>
+  <div id="bar">
+    status: <span id="status">downloading…</span>
+    &nbsp;|&nbsp; <button onclick="document.getElementById('canvas').focus()">focus canvas</button>
+    &nbsp;|&nbsp; <span id="fps">fps —</span>
+  </div>
+  <div id="playarea">
+    <canvas id="canvas" oncontextmenu="event.preventDefault()" tabindex="-1"
+            width="800" height="600" style="width:800px;height:600px"></canvas>
+  </div>
+  <div id="log"></div>
+
+<script>
+// ---- log capture (so a headless driver can read the engine's stdout) ----
+window.RWK_LOG = [];
+function rwklog(t, err) {
+  window.RWK_LOG.push(t);
+  var el = document.getElementById('log');
+  if (el) { el.textContent += t + "\n"; el.scrollTop = el.scrollHeight; }
+  (err ? console.error : console.log)(t);
+}
+function setStatus(t){ var e=document.getElementById('status'); if(e) e.textContent=t; }
+
+// ---- ad / social hooks the C++ calls through emscripten_run_script ----
+// Stubs only: the real page wires an ad network here.  We never show an ad.
+function _ShowInterstitial(){ rwklog("[stub] ShowInterstitial -> AdComplete('blocked')");
+  var p = stringToNewUTF8("blocked"); _AdComplete(p); _free(p); }
+function _RefreshBanner(){ /* no banner */ }
+function IsAdBlock(){ return 0; }
+function OnStartup(){ rwklog("[page] OnStartup()"); }
+// graphics_core queries the host page for a forced small-screen layout
+function WebQuery(q){ rwklog("[page] WebQuery("+q+") -> 0"); return 0; }
+
+
+// ---- P0" GL probe: wrap the WebGL context so we can count draws from JS ----
+(function(){
+  var orig = HTMLCanvasElement.prototype.getContext;
+  window.RWK_GL = {draws:0, arrays:0, elements:0, clears:0, texBound:0, err:0, lastTex:null, texImage:0};
+  HTMLCanvasElement.prototype.getContext = function(type, attrs){
+    var g = orig.call(this, type, attrs);
+    if (g && /webgl/.test(type) && !g.__rwkWrapped) {
+      g.__rwkWrapped = true;
+      var S = window.RWK_GL;
+      var da = g.drawArrays.bind(g), de = g.drawElements.bind(g),
+          cl = g.clear.bind(g), bt = g.bindTexture.bind(g), ti = g.texImage2D.bind(g);
+      g.drawArrays   = function(){ S.draws++; S.arrays++;   return da.apply(null, arguments); };
+      g.drawElements = function(){ S.draws++; S.elements++; return de.apply(null, arguments); };
+      g.clear        = function(){ S.clears++; return cl.apply(null, arguments); };
+      g.bindTexture  = function(t,tex){ if(tex) S.texBound++; S.lastTex = tex; return bt(t,tex); };
+      g.texImage2D   = function(){ S.texImage++; return ti.apply(null, arguments); };
+      window.RWK_GLCTX = g;
+    }
+    return g;
+  };
+})();
+
+var Module = {
+  canvas: (function(){
+    var c = document.getElementById('canvas');
+    c.addEventListener("webglcontextlost", function(e){ rwklog("WebGL context lost",1); e.preventDefault(); }, false);
+    return c;
+  })(),
+  print:    function(t){ rwklog(t); },
+  printErr: function(t){ rwklog(t, 1); },
+  setStatus: function(t){ if (t) setStatus(t); },
+  onRuntimeInitialized: function(){ setStatus("runtime initialised"); window.RWK_RUNTIME_READY = true; },
+  totalDependencies: 0,
+  monitorRunDependencies: function(left){
+    this.totalDependencies = Math.max(this.totalDependencies, left);
+    setStatus(left ? ('preparing… ('+(this.totalDependencies-left)+'/'+this.totalDependencies+')') : 'all downloads complete');
+  }
+};
+window.onerror = function(e){ rwklog("window.onerror: " + e, 1); };
+
+// crude fps meter
+(function(){ var n=0,t0=performance.now();
+  var raf=window.requestAnimationFrame;
+  window.requestAnimationFrame=function(cb){ return raf(function(ts){ n++;
+      var dt=performance.now()-t0; if(dt>1000){ document.getElementById('fps').textContent='fps '+(n*1000/dt).toFixed(1);
+      window.RWK_FPS=n*1000/dt; n=0;t0=performance.now(); } cb(ts); }); };
+})();
+</script>
+
+<!-- the engine's own JS side (Startup/getCanvasWidth/paste helpers), from the mirror's OS/WASM/util.js -->
+<script src="util.js"></script>
+<script async src="index.js"></script>
+</body>
+</html>
+
+<script>
+// ===========================================================================
+// P0" E2 driver: load a level, run a tape, emit the SAME CSV the native
+// `RWKP0 --oracle` writes, so the two streams can be diffed byte-for-byte.
+// ===========================================================================
+function rwkTapeFromSpans(spansText, ticks) {
+  const BIT = {left:1, right:2, jump:4, shoot:8, rocket:16, rocketup:32};
+  const t = new Uint8Array(ticks);
+  for (const raw of spansText.split("\n")) {
+    const line = raw.trim();
+    if (!line || line[0] === "#") continue;
+    const [name, from, to] = line.split(",");
+    const b = BIT[name.trim()];
+    if (!b) throw new Error("unknown button " + name);
+    for (let i = Math.max(0, +from); i <= Math.min(ticks - 1, +to); i++) t[i] |= b;
+  }
+  return t;
+}
+
+// returns {csv, ticks, ms, ticksPerSec, settle, gridW, gridH}
+function rwkRunTape(level, spansText, ticks, draw) {
+  const M = Module;
+  if (!(M._rwk_state)) throw new Error("exports missing");
+  if (!(M._rwk_state() & 2)) throw new Error("engine has not finished loading (state=" + M._rwk_state() + ")");
+
+  M._rwk_pause(1);
+  M._rwk_take_input(1);
+
+  const lvlPtr = M.stringToNewUTF8(level);
+  const settle = M._rwk_load_level(lvlPtr, 400);
+  M._free(lvlPtr);
+  if (settle < 0) { M._rwk_pause(0); throw new Error("rwk_load_level failed for " + level); }
+
+  const NF = M._rwk_obs_floats();
+  const tape = rwkTapeFromSpans(spansText, ticks);
+  const tapePtr = M._malloc(ticks);
+  M.HEAPU8.set(tape, tapePtr);
+  const outPtr = M._malloc(ticks * NF * 4);
+
+  const t0 = performance.now();
+  const n = M._rwk_run_tape(tapePtr, ticks, outPtr, draw ? 1 : 0);
+  const ms = performance.now() - t0;
+
+  const f = new Float32Array(M.HEAPF32.buffer, outPtr, n * NF);
+  const rows = [];
+  rows.push("tick,held,x,y,speed,gravity,gmod,touchingGround,jumpKludge,inJump,doubleJump,rocketCd,timer,died,win");
+  const F = (v) => v.toFixed(6);
+  const I = (v) => String(Math.round(v));
+  for (let i = 0; i < n; i++) {
+    const o = i * NF;
+    rows.push([i, tape[i], F(f[o]), F(f[o+1]), F(f[o+2]), F(f[o+3]), F(f[o+4]),
+               I(f[o+5]), I(f[o+6]), I(f[o+7]), I(f[o+8]), I(f[o+9]),
+               I(f[o+10]), I(f[o+11]), I(f[o+12])].join(","));
+  }
+  const gridW = n ? f[15] : 0, gridH = n ? f[16] : 0;
+  M._free(tapePtr); M._free(outPtr);
+  return {csv: rows.join("\n") + "\n", ticks: n, ms, ticksPerSec: n / (ms / 1000),
+          settle, gridW, gridH};
+}
+window.rwkRunTape = rwkRunTape;
+</script>
+
+<script>
+// ===========================================================================
+// P0" E3: inject a synthetic .kitty from JS and load it two ways.
+// ===========================================================================
+function rwkSandboxDir() {
+  const cap = 2048, p = Module._malloc(cap);
+  Module._rwk_sandbox_dir(p, cap);
+  const s = Module.UTF8ToString(p); Module._free(p); return s;
+}
+window.rwkSandboxDir = rwkSandboxDir;
+function rwkMkdirTree(path) {
+  const parts = path.split("/").filter(Boolean);
+  let cur = "";
+  for (const p of parts) { cur += "/" + p; try { FS.mkdir(cur); } catch (e) { /* exists */ } }
+}
+
+// bytes: a plain Array of byte values (page.evaluate cannot pass Uint8Array in).
+function rwkInjectLevel(name, bytes, persist) {
+  const M = Module;
+  const dir = rwkSandboxDir() + "EXTRALEVELS64";
+  const out = {dir, name, wrote: 0, synced: null, listBefore: null, listAfter: null};
+  rwkMkdirTree(dir);
+  const u8 = new Uint8Array(bytes);
+  FS.writeFile(dir + "/" + name + ".kitty", u8);
+  out.wrote = FS.stat(dir + "/" + name + ".kitty").size;
+  return out;
+}
+
+function rwkSyncFs() {
+  return new Promise((res) => { try { FS.syncfs(false, (e) => res(e ? String(e) : "ok")); }
+                                catch (e) { res("throw: " + e); } });
+}
+
+function rwkReadCStr(fn, cap) {
+  const p = Module._malloc(cap);
+  const n = fn(p, cap);
+  const s = Module.UTF8ToString(p);
+  Module._free(p);
+  return {n, s};
+}
+function rwkListLocalLevels(cap) { return rwkReadCStr((p, c) => Module._rwk_list_local_levels(p, c), cap || 4096); }
+function rwkMakermallLocal(cap) {
+  const p = Module._malloc(cap || 65536);
+  const n = Module._rwk_makermall_local(p, cap || 65536, 30);
+  const s = Module.UTF8ToString(p);
+  Module._free(p);
+  return {n, s};
+}
+window.rwkInjectLevel = rwkInjectLevel; window.rwkSyncFs = rwkSyncFs;
+window.rwkListLocalLevels = rwkListLocalLevels; window.rwkMakermallLocal = rwkMakermallLocal;
+</script>
+
+<script>
+// P0" : observation readout for the page / a driver.
+function rwkObserve() {
+  const NF = Module._rwk_obs_floats(), p = Module._malloc(NF * 4);
+  const n = Module._rwk_observe(p);
+  const f = Array.from(new Float32Array(Module.HEAPF32.buffer, p, NF));
+  Module._free(p);
+  return {n, x: f[0], y: f[1], speed: f[2], gravity: f[3], grounded: f[5],
+          inJump: f[7], hp: f[13], powers: f[14], w: f[15], h: f[16], raw: f};
+}
+window.rwkObserve = rwkObserve;
+// Load a level and hand control back to the ENGINE's own key polling.
+function rwkPlayLive(level) {
+  Module._rwk_pause(1); Module._rwk_take_input(1);
+  const p = Module.stringToNewUTF8(level);
+  const s = Module._rwk_load_level(p, 400); Module._free(p);
+  Module._rwk_take_input(0);   // engine polls the real keyboard again
+  Module._rwk_pause(0);        // browser frame loop drives the game
+  return {settle: s, obs: rwkObserve()};
+}
+window.rwkPlayLive = rwkPlayLive;
+// Does the BROWSER deliver keydown at all?  Distinguishes "no event" from
+// "SDL never registered a listener".
+window.RWK_KEYS = {win:0, doc:0, canvas:0, last:""};
+window.addEventListener("keydown", e => { RWK_KEYS.win++; RWK_KEYS.last = e.code; });
+document.addEventListener("keydown", e => { RWK_KEYS.doc++; });
+document.getElementById("canvas").addEventListener("keydown", e => { RWK_KEYS.canvas++; });
+</script>

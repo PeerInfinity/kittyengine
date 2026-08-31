@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  native:
+    name: native build + completability gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            cmake clang libsdl2-dev libsdl2-image-dev libglew-dev \
+            libcurl4-openssl-dev libgl1-mesa-dri libglu1-mesa xvfb
+          python3 -m pip install --upgrade pip
+          python3 -m pip install Pillow
+
+      # A gate nobody has seen go red is not a gate.  Both of ours can
+      # demonstrate their own failure, and they do it here before the run that
+      # is allowed to say "green" happens.
+      - name: gates prove they can fail
+        run: |
+          python3 scripts/no_originals_guard.py --self-test
+          python3 scripts/completability_gate.py --self-test
+
+      - name: no original asset is in this tree
+        run: python3 scripts/no_originals_guard.py
+
+      - name: the placeholder pack is what the generator writes
+        run: python3 tools/genpack/genpack.py --check
+
+      - name: build
+        run: |
+          cd RWK_Source/Games/RWK/Project/Linux
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build -j"$(nproc)"
+
+      - name: every demo level is still completable
+        env:
+          SDL_VIDEODRIVER: offscreen
+          SDL_AUDIODRIVER: dummy
+        run: xvfb-run -a python3 scripts/completability_gate.py
+
+  wasm:
+    name: wasm build + guard over the artifact
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: mymindstorm/setup-emsdk@v14
+        with:
+          version: latest
+
+      - name: build
+        run: ./wasm/build.sh
+
+      # The preload package CONCATENATES its inputs, so an original inside
+      # index.data is not a whole-file hash hit.  The guard unpacks it.
+      - name: no original asset is in the built artifact
+        run: python3 scripts/no_originals_guard.py wasm/page
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kittyengine-web
+          path: |
+            wasm/page/index.html
+            wasm/page/index.js
+            wasm/page/index.wasm
+            wasm/page/index.data
+            wasm/page/util.js

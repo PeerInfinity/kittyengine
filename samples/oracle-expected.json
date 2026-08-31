@@ -1,0 +1,55 @@
+{
+ "_doc": "Expected oracle results for samples/*, recorded by scripts/local/completability_gate.py --write.  The engine is not in this repository; these are the numbers a local run must reproduce.",
+ "_oracle": "RWKAUD",
+ "_seed": 1,
+ "samples": {
+  "corridor": {
+   "name": "corridor",
+   "grid": [
+    101,
+    12
+   ],
+   "ticks_run": 1066,
+   "won_at": 1034,
+   "died_at": null,
+   "final_x": 3886.5,
+   "digest": "c46dd331022c5558bb343b9b1319ea4d"
+  },
+  "corridor-rwk": {
+   "name": "corridor-rwk",
+   "grid": [
+    231,
+    12
+   ],
+   "ticks_run": 2454,
+   "won_at": 2422,
+   "died_at": null,
+   "final_x": 9089.0,
+   "digest": "4fa1aa105fb31f51e313b387e47c83ea"
+  },
+  "minimal": {
+   "name": "minimal",
+   "grid": [
+    12,
+    6
+   ],
+   "ticks_run": 110,
+   "won_at": 78,
+   "died_at": null,
+   "final_x": 326.5,
+   "digest": "daf06a0dd4b8e87bf213945ba3139197"
+  },
+  "steps": {
+   "name": "steps",
+   "grid": [
+    47,
+    12
+   ],
+   "ticks_run": 448,
+   "won_at": 416,
+   "died_at": null,
+   "final_x": 1568.0,
+   "digest": "1beb1fd998d5fa795512899a3453abef"
+  }
+ }
+}

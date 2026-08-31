@@ -1,0 +1,35 @@
+﻿
+
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RWK", "RWK\RWK.vcxproj", "{C4EBE17C-B203-4A09-ACB5-F4458F588D82}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FB7CDEF6-D7BC-48F3-B4ED-C668C313A707} = {FB7CDEF6-D7BC-48F3-B4ED-C668C313A707}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RAPT", "..\..\..\..\Framework\OS\Windows\RAPT\RAPT\RAPT.vcxproj", "{FB7CDEF6-D7BC-48F3-B4ED-C668C313A707}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Leak Testing|Win32 = Leak Testing|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4EBE17C-B203-4A09-ACB5-F4458F588D82}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C4EBE17C-B203-4A09-ACB5-F4458F588D82}.Debug|Win32.Build.0 = Debug|Win32
+		{C4EBE17C-B203-4A09-ACB5-F4458F588D82}.Leak Testing|Win32.ActiveCfg = Leak Testing|Win32
+		{C4EBE17C-B203-4A09-ACB5-F4458F588D82}.Leak Testing|Win32.Build.0 = Leak Testing|Win32
+		{C4EBE17C-B203-4A09-ACB5-F4458F588D82}.Release|Win32.ActiveCfg = Release|Win32
+		{C4EBE17C-B203-4A09-ACB5-F4458F588D82}.Release|Win32.Build.0 = Release|Win32
+		{FB7CDEF6-D7BC-48F3-B4ED-C668C313A707}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FB7CDEF6-D7BC-48F3-B4ED-C668C313A707}.Debug|Win32.Build.0 = Debug|Win32
+		{FB7CDEF6-D7BC-48F3-B4ED-C668C313A707}.Leak Testing|Win32.ActiveCfg = Leak Testing|Win32
+		{FB7CDEF6-D7BC-48F3-B4ED-C668C313A707}.Leak Testing|Win32.Build.0 = Leak Testing|Win32
+		{FB7CDEF6-D7BC-48F3-B4ED-C668C313A707}.Release|Win32.ActiveCfg = Release|Win32
+		{FB7CDEF6-D7BC-48F3-B4ED-C668C313A707}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

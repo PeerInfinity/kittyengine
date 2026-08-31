@@ -1,0 +1,10 @@
+# steps: the intended solution, as the engine's oracle tape
+# button,fromTick,toTick  (inclusive); replayed by scripts/local/completability_gate.py
+right,0,500
+jump,30,35
+jump,55,60
+jump,80,85
+jump,105,110
+jump,130,135
+jump,155,160
+jump,180,185

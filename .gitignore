@@ -1,0 +1,17 @@
+.DS_Store
+
+# the engine binary: CMake writes it beside the assets it loads, because the
+# package folder IS the executable's folder
+RWK_Source/Games/RWK/Resources/kittyengine
+
+# build trees.  These are anchored on purpose: a bare "build/" would also
+# swallow ThirdParty/GLEW/build, which is GLEW's own cmake config, not output.
+/build/
+RWK_Source/Games/RWK/Project/Linux/build/
+wasm/obj/
+wasm/page/index.js
+wasm/page/index.wasm
+wasm/page/index.data
+
+__pycache__/
+*.pyc
